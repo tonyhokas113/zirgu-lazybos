@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label>About:</label>
-                            <textarea class="form-control" name="horse_about" id="summernote">{{$horse->about}}</textarea>
+                            <textarea class="form-control" name="horse_about" value="{{old('horse_about',$horse->about)}}" id="summernote">{{$horse->about}}</textarea>
                         </div>
                         @csrf
                         <button class="btn btn-info" type="submit">EDIT</button>

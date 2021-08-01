@@ -48,6 +48,7 @@ class HorseController extends Controller
                 'horse_name' => ['required', 'min:3', 'max:100'],
                 'horse_runs' => ['required', 'min:1', 'max:4'],
                 'horse_wins' => ['required', 'min:1', 'max:4'],
+                'horse_about' => ['required'],
             ]
         );
 
@@ -102,6 +103,7 @@ class HorseController extends Controller
                 'horse_name' => ['required', 'min:3', 'max:100'],
                 'horse_runs' => ['required', 'min:1', 'max:4'],
                 'horse_wins' => ['required', 'min:1', 'max:4'],
+                'horse_about' => ['required'],
             ]
         );
 

@@ -15,7 +15,7 @@
                                     <p><span> Vardas: </span> {{$horse->name}} </p>
                                     <p><span> Keliose varžybose dalyvavo: </span> {{$horse->runs}} </p>
                                     <p><span> Laimėtos varžybos: </span> {{$horse->wins}} </p>
-                                    <p><span> Apie žirgą: </span> {{$horse->about}} </p>
+                                    <p><span> Apie žirgą: </span> {!! $horse->about !!} </p>
                                 </div>
                                 <div class="list-container-buttons">
                                     <a class="btn btn-success" href="{{route('horse.edit',$horse)}}">EDIT</a>
