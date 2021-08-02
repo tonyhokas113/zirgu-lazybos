@@ -21,10 +21,12 @@ class BetterController extends Controller
      */
     public function index(Request $request)
     {
-
         $dir = 'asc';
         $sort = 'name';
         $betters = Better::all();
+        $horses = Horse::all();
+        $defaultHorse = 0;
+        $s = '';
 
         if ($request->sort_by && $request->dir) {
             if ('name' == $request->sort_by && 'asc' == $request->dir) {
@@ -42,12 +44,25 @@ class BetterController extends Controller
             } else {
                 $betters = Better::all();
             }
+        } elseif ($request->horse_id) {
+            $betters = Better::where('horse_id', (int)$request->horse_id)->get();
+            $defaultHorse = (int)$request->horse_id;
+        } elseif ($request->s) {
+            $betters = Better::where('name', 'like', '%' . $request->s . '%')->get();
+            $s = $request->s;
+        } elseif ($request->do_search) {
+            $betters = Better::where('name', 'like', '')->get();
+        } else {
+            $betters = Better::all();
         }
 
         return view('better.index', [
             'betters' => $betters,
             'dir' => $dir,
             'sort' => $sort,
+            'horses' => $horses,
+            'defaultHorse' => $defaultHorse,
+            's' => $s,
         ]);
     }
 

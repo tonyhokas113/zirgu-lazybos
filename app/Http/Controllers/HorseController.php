@@ -18,12 +18,37 @@ class HorseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $dir = 'asc';
+        $sort = 'name';
         $horses = Horse::all();
-        return view('horse.index', ['horses' => $horses]);
-    }
 
+        if ($request->sort_by && $request->dir) {
+            if ('name' == $request->sort_by && 'asc' == $request->dir) {
+                $horses = Horse::orderBy('name')->get();
+            } elseif ('name' == $request->sort_by && 'desc' == $request->dir) {
+                $horses = Horse::orderBy('name', 'desc')->get();
+                $dir = 'desc';
+            } elseif ('wins' == $request->sort_by && 'asc' == $request->dir) {
+                $horses = Horse::orderBy('wins')->get();
+                $sort = 'wins';
+            } elseif ('wins' == $request->sort_by && 'desc' == $request->dir) {
+                $horses = Horse::orderBy('wins', 'desc')->get();
+                $dir = 'desc';
+                $sort = 'wins';
+            } else {
+                $horses = Horse::all();
+            }
+        }
+
+
+        return view('horse.index', [
+            'horses' => $horses,
+            'dir' => $dir,
+            'sort' => $sort,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -128,7 +153,7 @@ class HorseController extends Controller
      */
     public function destroy(Horse $horse)
     {
-        if ($horse->betterHorse->count()) {
+        if ($horse->horseHorse->count()) {
             return redirect()->back()->with('info_message', 'We can\'t delete this horse, because it has an active bet on him');
         }
         $horse->delete();

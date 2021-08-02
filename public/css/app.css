@@ -10055,3 +10055,13 @@ legend {
 .sort-form a {
   margin-left: 15px;
 }
+
+.customFieldset {
+  border: none;
+  padding: 0;
+  margin: 2px 0 0 5px;
+}
+.customFieldset input {
+  width: 200px;
+  margin-right: 8px;
+}
