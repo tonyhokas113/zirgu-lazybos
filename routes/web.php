@@ -42,3 +42,7 @@ Route::group(['prefix' => 'betters'], function () {
     Route::post('delete/{better}', [BetterController::class, 'destroy'])->name('better.destroy');
     Route::get('show/{better}', [BetterController::class, 'show'])->name('better.show');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
